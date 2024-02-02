@@ -1,7 +1,12 @@
+
+@@ -0,0 +1,224 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.lang.System.in;
 
 class Laptop {
     private String name;
@@ -34,13 +39,13 @@ class Laptop {
     @Override
     public String toString() {
         return "Ноутбук:\n" +
-               "- Модель: " + name + "\n" +
-               "- Процессор: " + cpu + "\n" +
-               "- Объем памяти SSD/HDD: " + memory + " ГБ\n" +
-               "- Видеокарта: " + gpu + "\n" +
-               "- Объем оперативной памяти: " + ram + " ГБ\n" +
-               "- Операционная система: " + os + "\n" +
-               "- Цвет: " + color;
+                "- Модель: " + name + "\n" +
+                "- Процессор: " + cpu + "\n" +
+                "- Объем памяти SSD/HDD: " + memory + " ГБ\n" +
+                "- Видеокарта: " + gpu + "\n" +
+                "- Объем оперативной памяти: " + ram + " ГБ\n" +
+                "- Операционная система: " + os + "\n" +
+                "- Цвет: " + color;
     }
 
     @Override
@@ -49,12 +54,12 @@ class Laptop {
         if (o == null || getClass() != o.getClass()) return false;
         Laptop laptop = (Laptop) o;
         return memory == laptop.memory &&
-               ram == laptop.ram &&
-               name.equals(laptop.name) &&
-               cpu.equals(laptop.cpu) &&
-               gpu.equals(laptop.gpu) &&
-               os.equals(laptop.os) &&
-               color.equals(laptop.color);
+                ram == laptop.ram &&
+                name.equals(laptop.name) &&
+                cpu.equals(laptop.cpu) &&
+                gpu.equals(laptop.gpu) &&
+                os.equals(laptop.os) &&
+                color.equals(laptop.color);
     }
 
     @Override
@@ -65,7 +70,7 @@ class Laptop {
 
 
 public class Attestat {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Создаем новые модели ноутбуков
         Laptop laptop1 = new Laptop("HP Pavilion", "Intel Core i7", 1024, "NVIDIA GeForce GTX 1660 Ti",
                 16, "Windows 10", "Silver");
@@ -99,8 +104,8 @@ public class Attestat {
         userRequest(laptops);
     }
 
-    public static void userRequest(Set<Laptop> laptops) {
-        try (Scanner scanner = new Scanner(System.in)) {
+    public static void userRequest(Set<Laptop> laptops) throws IOException {
+        try (Scanner scanner = new Scanner(in)) {
             System.out.println("Введите цифру, соответствующую необходимому критерию:");
             System.out.println("1 - Наименование");
             System.out.println("2 - Процессор");
@@ -162,7 +167,7 @@ public class Attestat {
             for (Laptop laptop : filteredLaptops) {
                 System.out.println(laptop);
             }
-        }
+        } in.close();
     }
 
     public static Set<Laptop> filterLaptops(Set<Laptop> laptops, Map<String, Object> filterCriteria) {
